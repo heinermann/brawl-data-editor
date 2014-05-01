@@ -77,7 +77,7 @@ namespace BrawlEventEditor.Brawl
     {
         Normal,
         Metal,
-        Flat
+        Invisible
     };
 
     [TypeConverter(typeof(ExpandableObjectConverter))]
