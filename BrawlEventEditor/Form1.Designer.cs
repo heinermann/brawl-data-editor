@@ -81,6 +81,7 @@
             this.entry_props.Dock = System.Windows.Forms.DockStyle.Fill;
             this.entry_props.Location = new System.Drawing.Point(0, 0);
             this.entry_props.Name = "entry_props";
+            this.entry_props.PropertySort = System.Windows.Forms.PropertySort.Categorized;
             this.entry_props.Size = new System.Drawing.Size(470, 499);
             this.entry_props.TabIndex = 0;
             // 

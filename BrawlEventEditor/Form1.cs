@@ -53,15 +53,9 @@ namespace BrawlEventEditor
         {
             string key = entry_list.SelectedItem.ToString();
             if (Program.event_file.m_entries.ContainsKey(key) )
-            {
-                MessageBox.Show(key + " FOUND");
                 entry_props.SelectedObject = Program.event_file.m_entries[key];
-            }
             else
-            {
-                MessageBox.Show(key + " NOT FOUND");
                 entry_props.SelectedObject = null;
-            }
         }
     }
 }

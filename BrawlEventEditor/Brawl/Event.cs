@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ComponentModel;
 
 namespace BrawlEventEditor.Brawl
 {
@@ -62,25 +63,144 @@ namespace BrawlEventEditor.Brawl
             set { m_u0C = value; }
         }
 
+        [TypeConverter(typeof(Types.UInt32HexTypeConverter))]
         public uint Flags10
         {
             get { return m_flags_10; }
             set { m_flags_10 = value; }
         }
 
-        public uint Unknown14
+        public float Unknown14
         {
             get { return m_u14; }
             set { m_u14 = value; }
         }
 
+        public ushort Unknown18
+        {
+            get { return m_u18; }
+            set { m_u18 = value; }
+        }
+
+        public ushort Unknown1A
+        {
+            get { return m_u1A; }
+            set { m_u1A = value; }
+        }
+
+        public byte Unknown1C
+        {
+            get { return m_u1C; }
+            set { m_u1C = value; }
+        }
+
+        public byte Unknown1D
+        {
+            get { return m_u1D; }
+            set { m_u1D = value; }
+        }
+
+        public byte Unknown1E
+        {
+            get { return m_u1E; }
+            set { m_u1E = value; }
+        }
+
+        public byte Stage
+        {
+            get { return m_stage_id; }
+            set { m_stage_id = value; }
+        }
+
+        [TypeConverter(typeof(Types.UInt32HexTypeConverter))]
         public uint Flags20
         {
             get { return m_flags_20; }
             set { m_flags_20 = value; }
         }
 
+        public uint Unknown24
+        {
+            get { return m_u24; }
+            set { m_u24 = value; }
+        }
 
+        [Category("Item Switch"), TypeConverter(typeof(Types.UInt32HexTypeConverter))]
+        public uint ItemSwitch1
+        {
+            get { return m_item_switch1; }
+            set { m_item_switch1 = value; }
+        }
+
+        [Category("Item Switch"), TypeConverter(typeof(Types.UInt32HexTypeConverter))]
+        public uint ItemSwitch2
+        {
+            get { return m_item_switch2; }
+            set { m_item_switch2 = value; }
+        }
+
+        [Category("Item Switch"), TypeConverter(typeof(Types.UInt32HexTypeConverter))]
+        public uint PokemonSwitch
+        {
+            get { return m_poke_switch; }
+            set { m_poke_switch = value; }
+        }
+
+        [Category("Item Switch"), TypeConverter(typeof(Types.UInt32HexTypeConverter))]
+        public uint AssistTrophySwitch
+        {
+            get { return m_assist_switch; }
+            set { m_assist_switch = value; }
+        }
+
+        public float GameSpeed
+        {
+            get { return m_game_speed; }
+            set { m_game_speed = value; }
+        }
+
+        public float CameraShake
+        {
+            get { return m_camera_shake; }
+            set { m_camera_shake = value; }
+        }
+
+        [TypeConverter(typeof(Types.UInt32HexTypeConverter))]
+        public uint Unknown40
+        {
+            get { return m_u40; }
+            set { m_u40 = value; }
+        }
+
+        public ushort Unknown44
+        {
+            get { return m_u44; }
+            set { m_u44 = value; }
+        }
+
+        public ushort Music
+        {
+            get { return m_music_id; }
+            set { m_music_id = value; }
+        }
+
+        public ushort Unknown48
+        {
+            get { return m_u48; }
+            set { m_u48 = value; }
+        }
+
+        public ushort Unknown4A
+        {
+            get { return m_u4A; }
+            set { m_u4A = value; }
+        }
+
+        public uint Unknown4C
+        {
+            get { return m_u4C; }
+            set { m_u4C = value; }
+        }
 
         public List<Character> Characters
         {
@@ -95,7 +215,7 @@ namespace BrawlEventEditor.Brawl
 	    private byte   m_u0B;
 	    private uint   m_u0C;
 	    private uint   m_flags_10;
-	    private uint   m_u14;
+	    private float  m_u14;
 	    private ushort m_u18;
 	    private ushort m_u1A;
 	    private byte   m_u1C;
@@ -111,7 +231,7 @@ namespace BrawlEventEditor.Brawl
 	    private float  m_game_speed;
 	    private float  m_camera_shake;
 	    private uint   m_u40;
-	    private ushort m_music_catagory;
+	    private ushort m_u44;
 	    private ushort m_music_id;
 	    private ushort m_u48;
 	    private ushort m_u4A;
@@ -150,7 +270,7 @@ namespace BrawlEventEditor.Brawl
             m_u0B               = reader.ReadByte();
             m_u0C               = reader.ReadUInt32();
             m_flags_10          = reader.ReadUInt32();
-            m_u14               = reader.ReadUInt32();
+            m_u14               = reader.ReadSingle();
             m_u18               = reader.ReadUInt16();
             m_u1A               = reader.ReadUInt16();
             m_u1C               = reader.ReadByte();
@@ -166,7 +286,7 @@ namespace BrawlEventEditor.Brawl
             m_game_speed        = reader.ReadSingle();
             m_camera_shake      = reader.ReadSingle();
             m_u40               = reader.ReadUInt32();
-            m_music_catagory    = reader.ReadUInt16();
+            m_u44    = reader.ReadUInt16();
             m_music_id          = reader.ReadUInt16();
             m_u48               = reader.ReadUInt16();
             m_u4A               = reader.ReadUInt16();
@@ -207,7 +327,7 @@ namespace BrawlEventEditor.Brawl
             writer.Write(m_game_speed);
             writer.Write(m_camera_shake);
             writer.Write(m_u40);
-            writer.Write(m_music_catagory);
+            writer.Write(m_u44);
             writer.Write(m_music_id);
             writer.Write(m_u48);
             writer.Write(m_u4A);
