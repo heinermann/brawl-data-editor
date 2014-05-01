@@ -17,6 +17,8 @@ namespace BrawlEventEditor.Brawl
         ushort  m_start_damage;
         ushort  m_unk5;
 
+        public const long SIZE = 14;
+
         public void load(GisSharpBlog.NetTopologySuite.IO.BEBinaryReader reader)
         {
             m_offense_ratio = reader.ReadUInt16();
@@ -32,12 +34,20 @@ namespace BrawlEventEditor.Brawl
 
         public void save(GisSharpBlog.NetTopologySuite.IO.BEBinaryWriter writer)
         {
-            throw new NotImplementedException();
+            writer.Write(m_offense_ratio);
+            writer.Write(m_defense_ratio);
+            writer.Write(m_unknown);
+            writer.Write(m_stock);
+            writer.Write(m_unk2);
+            writer.Write(m_unk3);
+            writer.Write(m_unk4);
+            writer.Write(m_start_damage);
+            writer.Write(m_unk5);
         }
 
         public long get_size()
         {
-            throw new NotImplementedException();
+            return SIZE;
         }
     }
 }
