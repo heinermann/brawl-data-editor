@@ -8,6 +8,7 @@ namespace BrawlEventEditor
     static class Program
     {
         public static Brawl.DataFile<Brawl.Event> event_file = new Brawl.DataFile<Brawl.Event>();
+        public static string lastSaveName = "";
 
         /// <summary>
         /// The main entry point for the application.

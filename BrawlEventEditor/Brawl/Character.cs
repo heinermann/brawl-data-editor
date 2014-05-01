@@ -6,19 +6,93 @@ using System.ComponentModel;
 
 namespace BrawlEventEditor.Brawl
 {
+    enum CharacterType : byte
+    {
+        Mario,
+        DonkeyKong,
+        Link,
+        Samus,
+        ZeroSuitSamus,
+        Yoshi,
+        Kirby,
+        Fox,
+        Pikachu,
+        Luigi,
+        CaptainFalcon,
+        Ness,
+        Bowser,
+        Peach,
+        Zelda,
+        Sheik,
+        IceClimbers,
+        Popo,
+        Nana,
+        Marth,
+        GameWatch,
+        Falco,
+        Ganon,
+        Wario,
+        Metaknight,
+        Pit,
+        Olimar,
+        Lucas,
+        DiddyKong,
+        TrainerCharizard,
+        Charizard,
+        TrainerVenasaur,
+        Venasaur,
+        TrainerSquirtle,
+        Squirtle,
+        KingDedede,
+        Lucario,
+        Ike,
+        ROB,
+        Jigglypuff,
+        ToonLink,
+        Wolf,
+        Snake,
+        Sonic,
+        GigaBowser,
+        WarioMan,
+        RedAlloy,
+        BlueAlloy,
+        YellowAlloy,
+        GreenAlloy,
+        MarioD,
+        BossPeteyPiranha,
+        BossRayquaza,
+        BossPorkyStatue,
+        BossPorky,
+        BossGalleom,
+        BossRidley,
+        BossDuon,
+        BossMetaRidley,
+        BossTabuu,
+        BossMasterHand,
+        BossCrazyHand,
+        None
+    };
+
+    enum Status : byte
+    {
+        Normal,
+        Metal,
+        Flat
+    };
+
     [TypeConverter(typeof(ExpandableObjectConverter))]
     class Character : IData
     {
-        public byte CharacterId
+        public CharacterType CharacterType
         {
-            get { return m_character_id; }
-            set { m_character_id = value; }
+            get { return (CharacterType)m_character_id; }
+            set { m_character_id = (byte)value; }
         }
 
-        public byte Status
+        public Status Status
         {
-            get { return m_status; }
-            set { m_status = value; }
+            get { return (Status)m_status; }
+            set { m_status = (byte)value; }
         }
 
         public byte Unknown02
@@ -51,10 +125,10 @@ namespace BrawlEventEditor.Brawl
             set { m_unk_09 = value; }
         }
 
-        public byte Unknown0A
+        public byte StartPosition
         {
-            get { return m_unk_0A; }
-            set { m_unk_0A = value; }
+            get { return m_start_pos; }
+            set { m_start_pos = value; }
         }
 
         public byte Unknown0B
@@ -103,7 +177,7 @@ namespace BrawlEventEditor.Brawl
         private float m_chara_size;
         private byte  m_team;
         private byte  m_unk_09;
-        private byte  m_unk_0A;
+        private byte  m_start_pos;
         private byte  m_unk_0B;
         private byte  m_unk_0C;
         private byte  m_unk_0D;
@@ -123,7 +197,7 @@ namespace BrawlEventEditor.Brawl
             m_chara_size    = reader.ReadSingle();
             m_team          = reader.ReadByte();
             m_unk_09        = reader.ReadByte();
-            m_unk_0A        = reader.ReadByte();
+            m_start_pos     = reader.ReadByte();
             m_unk_0B        = reader.ReadByte();
             m_unk_0C        = reader.ReadByte();
             m_unk_0D        = reader.ReadByte();
@@ -142,7 +216,7 @@ namespace BrawlEventEditor.Brawl
             writer.Write(m_chara_size);
             writer.Write(m_team);
             writer.Write(m_unk_09);
-            writer.Write(m_unk_0A);
+            writer.Write(m_start_pos);
             writer.Write(m_unk_0B);
             writer.Write(m_unk_0C);
             writer.Write(m_unk_0D);

@@ -20,6 +20,85 @@ namespace BrawlEventEditor.Brawl
         Everyone38
     };
 
+    enum ItemLevel : ushort
+    {
+        None,
+        Low,
+        Medium,
+        High,
+        Raining
+    };
+
+    enum Stage : byte
+    {
+        Dummy,
+        Battlefield,
+        FinalDestination,
+        DelfinoPlaza,
+        LuigisMansion,
+        MushroomyKingdom,
+        MarioCircuit,
+        Donnkey75m,
+        RumbleFalls,
+        PirateShip,
+        Zelda2,
+        Norfair,
+        FrigateOrpheon,
+        YoshisIsland,
+        Halberd,
+        TestHalberd00,
+        TestHalberd01,
+        TestHalberd02,
+        Karby2,
+        LylatCruise,
+        PokemonStadium2,
+        SpearPillar,
+        PortTownAeroDive,
+        Summit,
+        FlatZone2,
+        CastleSiege,
+        TestEmblem00,
+        TestEmblem01,
+        WarioWareInc,
+        DistantPlanet,
+        Skyworld,
+        MarioBros,
+        NewPorkCity,
+        Smashville,
+        ShadowMosesIsland,
+        GreenHillZone,
+        PictoChat,
+        Hanenbow,
+        ConfigTest,
+        Viewer,
+        Result,
+        MeleeTemple,
+        MeleeYoshisIsland,
+        MeleeJungleJapes,
+        MeleeOnett,
+        MeleeGreens,
+        MeleePokemonStadium,
+        MeleeRainbowCruise,
+        MeleeCorneria,
+        MeleeBigBlue,
+        MeleeBrinstar,
+        BridgeOfEldin,
+        HomerunContest,
+        StageEdit,
+        Heal,
+        OnlineTraining,
+        TargetBreak,
+        CharaRoll,
+        General,
+        Adventure,
+        Adventure0,
+        Adventure2,
+        AdvMeleeTest,
+        AdvMelee,
+        BattleS,
+        BattleFieldS
+    }
+
     class Event : IData
     {
         public EventExtension EventExtension
@@ -36,31 +115,32 @@ namespace BrawlEventEditor.Brawl
         public MatchType MatchType
         {
             get { return (MatchType)m_match_type; }
-            set { m_u04 = (byte)value; }
+            set { m_match_type = (byte)value; }
         }
 
         public byte Unknown09
         {
-            get { return m_u09; }
-            set { m_u09 = value; }
+            get { return m_padding09; }
+            set { m_padding09 = value; }
         }
 
         public byte Unknown0A
         {
-            get { return m_u0A; }
-            set { m_u0A = value; }
+            get { return m_padding0A; }
+            set { m_padding0A = value; }
         }
 
         public byte Unknown0B
         {
-            get { return m_u0B; }
-            set { m_u0B = value; }
+            get { return m_padding0B; }
+            set { m_padding0B = value; }
         }
 
-        public uint Unknown0C
+
+        public uint CountdownTime
         {
-            get { return m_u0C; }
-            set { m_u0C = value; }
+            get { return m_countdown; }
+            set { m_countdown = value; }
         }
 
         [TypeConverter(typeof(Types.UInt32HexTypeConverter))]
@@ -82,10 +162,11 @@ namespace BrawlEventEditor.Brawl
             set { m_u18 = value; }
         }
 
-        public ushort Unknown1A
+        [Category("Item Switch")]
+        public ItemLevel ItemLevel
         {
-            get { return m_u1A; }
-            set { m_u1A = value; }
+            get { return (ItemLevel)m_item_level; }
+            set { m_item_level = (ushort)value; }
         }
 
         public byte Unknown1C
@@ -106,10 +187,10 @@ namespace BrawlEventEditor.Brawl
             set { m_u1E = value; }
         }
 
-        public byte Stage
+        public Stage Stage
         {
-            get { return m_stage_id; }
-            set { m_stage_id = value; }
+            get { return (Stage)m_stage_id; }
+            set { m_stage_id = (byte)value; }
         }
 
         [TypeConverter(typeof(Types.UInt32HexTypeConverter))]
@@ -210,14 +291,14 @@ namespace BrawlEventEditor.Brawl
 	    private uint   m_event_ext;
 	    private uint   m_u04;
 	    private byte   m_match_type;
-	    private byte   m_u09;
-	    private byte   m_u0A;
-	    private byte   m_u0B;
-	    private uint   m_u0C;
+	    private byte   m_padding09;
+	    private byte   m_padding0A;
+	    private byte   m_padding0B;
+	    private uint   m_countdown;
 	    private uint   m_flags_10;
 	    private float  m_u14;
 	    private ushort m_u18;
-	    private ushort m_u1A;
+	    private ushort m_item_level;
 	    private byte   m_u1C;
 	    private byte   m_u1D;
 	    private byte   m_u1E;
@@ -239,7 +320,7 @@ namespace BrawlEventEditor.Brawl
 
         private List<Character> m_characters = new List<Character>();
 
-        public const uint HEAD_SIZE = 70;
+        public const uint HEAD_SIZE = 80;
 
         uint num_players(EventExtension ext)
         {
@@ -265,14 +346,14 @@ namespace BrawlEventEditor.Brawl
             m_event_ext         = reader.ReadUInt32();
             m_u04               = reader.ReadUInt32();
             m_match_type        = reader.ReadByte();
-            m_u09               = reader.ReadByte();
-            m_u0A               = reader.ReadByte();
-            m_u0B               = reader.ReadByte();
-            m_u0C               = reader.ReadUInt32();
+            m_padding09               = reader.ReadByte();
+            m_padding0A               = reader.ReadByte();
+            m_padding0B               = reader.ReadByte();
+            m_countdown               = reader.ReadUInt32();
             m_flags_10          = reader.ReadUInt32();
             m_u14               = reader.ReadSingle();
             m_u18               = reader.ReadUInt16();
-            m_u1A               = reader.ReadUInt16();
+            m_item_level               = reader.ReadUInt16();
             m_u1C               = reader.ReadByte();
             m_u1D               = reader.ReadByte();
             m_u1E               = reader.ReadByte();
@@ -306,14 +387,14 @@ namespace BrawlEventEditor.Brawl
             writer.Write(m_event_ext);
             writer.Write(m_u04);
             writer.Write(m_match_type);
-            writer.Write(m_u09);
-            writer.Write(m_u0A);
-            writer.Write(m_u0B);
-            writer.Write(m_u0C);
+            writer.Write(m_padding09);
+            writer.Write(m_padding0A);
+            writer.Write(m_padding0B);
+            writer.Write(m_countdown);
             writer.Write(m_flags_10);
             writer.Write(m_u14);
             writer.Write(m_u18);
-            writer.Write(m_u1A);
+            writer.Write(m_item_level);
             writer.Write(m_u1C);
             writer.Write(m_u1D);
             writer.Write(m_u1E);

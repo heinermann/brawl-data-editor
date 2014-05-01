@@ -21,16 +21,16 @@ namespace BrawlEventEditor.Brawl
             set { m_defense_ratio = value; }
         }
 
-        public byte Unknown04
+        public byte AI
         {
-            get { return m_unk04; }
-            set { m_unk04 = value; }
+            get { return m_ai; }
+            set { m_ai = value; }
         }
 
-        public byte Unknown05
+        public byte Costume
         {
-            get { return m_unk05; }
-            set { m_unk05 = value; }
+            get { return m_costume; }
+            set { m_costume = value; }
         }
 
         public byte Stock
@@ -45,16 +45,10 @@ namespace BrawlEventEditor.Brawl
             set { m_unk07 = value; }
         }
 
-        public byte Unknown08
+        public ushort HP
         {
-            get { return m_unk08; }
-            set { m_unk08 = value; }
-        }
-
-        public byte Unknown09
-        {
-            get { return m_unk09; }
-            set { m_unk09 = value; }
+            get { return m_hp; }
+            set { m_hp = value; }
         }
 
         public ushort Damagge
@@ -77,12 +71,11 @@ namespace BrawlEventEditor.Brawl
 
         public ushort  m_offense_ratio;
         public ushort  m_defense_ratio;
-        public byte    m_unk04;
-        public byte    m_unk05;
+        public byte    m_ai;
+        public byte    m_costume;
         public byte    m_stock;
         public byte    m_unk07;
-        public byte    m_unk08;
-        public byte    m_unk09;
+        public ushort  m_hp;
         public ushort  m_start_damage;
         public byte    m_unk0C;
         public byte    m_unk0D;
@@ -93,12 +86,11 @@ namespace BrawlEventEditor.Brawl
         {
             m_offense_ratio = reader.ReadUInt16();
             m_defense_ratio = reader.ReadUInt16();
-            m_unk04         = reader.ReadByte();
-            m_unk05         = reader.ReadByte();
+            m_ai            = reader.ReadByte();
+            m_costume       = reader.ReadByte();
             m_stock         = reader.ReadByte();
             m_unk07         = reader.ReadByte();
-            m_unk08         = reader.ReadByte();
-            m_unk09         = reader.ReadByte();
+            m_hp            = reader.ReadUInt16();
             m_start_damage  = reader.ReadUInt16();
             m_unk0C         = reader.ReadByte();
             m_unk0D         = reader.ReadByte();
@@ -108,12 +100,11 @@ namespace BrawlEventEditor.Brawl
         {
             writer.Write(m_offense_ratio);
             writer.Write(m_defense_ratio);
-            writer.Write(m_unk04);
-            writer.Write(m_unk05);
+            writer.Write(m_ai);
+            writer.Write(m_costume);
             writer.Write(m_stock);
             writer.Write(m_unk07);
-            writer.Write(m_unk08);
-            writer.Write(m_unk09);
+            writer.Write(m_hp);
             writer.Write(m_start_damage);
             writer.Write(m_unk0C);
             writer.Write(m_unk0D);

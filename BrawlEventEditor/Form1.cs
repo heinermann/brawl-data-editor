@@ -25,6 +25,7 @@ namespace BrawlEventEditor
         {
             if ( openFileDialog.ShowDialog() == DialogResult.OK )
             {
+                Program.lastSaveName = openFileDialog.FileName;
                 Program.event_file.load(openFileDialog.FileName);
                 entry_list.Items.Clear();
                 entry_list.Items.AddRange( Program.event_file.m_entries.Keys.ToArray() );
@@ -33,13 +34,18 @@ namespace BrawlEventEditor
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Unimplemented");
+            if (Program.lastSaveName == "" && saveFileDialog.ShowDialog() == DialogResult.OK)
+                Program.lastSaveName = saveFileDialog.FileName;
+
+            if (Program.lastSaveName != "")
+                Program.event_file.save(Program.lastSaveName);
         }
 
         private void saveasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
+                Program.lastSaveName = saveFileDialog.FileName;
                 Program.event_file.save(saveFileDialog.FileName);
             }
         }

@@ -52,11 +52,14 @@ namespace BrawlEventEditor.Brawl
 
                 m_entries.Add(builder.ToString(), data);
             }
+
+            reader.Close();
+            stream.Close();
         }
 
         public void save(string filename)
         {
-            FileStream stream = new FileStream(filename, FileMode.CreateNew);
+            FileStream stream = new FileStream(filename, FileMode.Create);
             BEBinaryWriter writer = new BEBinaryWriter(stream, Encoding.UTF8);
 
             // Retrieve information
@@ -104,6 +107,9 @@ namespace BrawlEventEditor.Brawl
                 writer.Write(p.Key.ToCharArray());
                 writer.Write('\0');
             }
+
+            writer.Close();
+            stream.Close();
         }
 
 
