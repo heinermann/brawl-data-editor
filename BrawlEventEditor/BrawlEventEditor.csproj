@@ -61,6 +61,7 @@
     <Compile Include="Lib\BEBinaryWriter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Types\FloatType.cs" />
     <Compile Include="Types\HexType.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

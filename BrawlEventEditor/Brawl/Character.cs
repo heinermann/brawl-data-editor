@@ -107,6 +107,7 @@ namespace BrawlEventEditor.Brawl
             set { m_unk_03 = value; }
         }
 
+        [TypeConverter(typeof(Types.FloatTypeConverter))]
         public float Size
         {
             get { return m_chara_size; }

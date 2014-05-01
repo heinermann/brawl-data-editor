@@ -51,7 +51,7 @@ namespace BrawlEventEditor.Brawl
             set { m_hp = value; }
         }
 
-        public ushort Damagge
+        public ushort Damage
         {
             get { return m_start_damage; }
             set { m_start_damage = value; }

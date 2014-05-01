@@ -29,7 +29,7 @@ namespace BrawlEventEditor.Brawl
         Raining
     };
 
-    enum Stage : byte
+    enum Stage : ushort
     {
         Dummy,
         Battlefield,
@@ -150,16 +150,24 @@ namespace BrawlEventEditor.Brawl
             set { m_flags_10 = value; }
         }
 
+        [TypeConverter(typeof(Types.FloatTypeConverter))]
         public float Unknown14
         {
             get { return m_u14; }
             set { m_u14 = value; }
         }
 
-        public ushort Unknown18
+        // 0x80 = hide damage
+        public byte Flags18
         {
             get { return m_u18; }
             set { m_u18 = value; }
+        }
+
+        public bool IsTeamGame
+        {
+            get { return m_is_team_game != 0; }
+            set { m_is_team_game = (byte)(value ? 0 : 1); }
         }
 
         [Category("Item Switch")]
@@ -181,16 +189,10 @@ namespace BrawlEventEditor.Brawl
             set { m_u1D = value; }
         }
 
-        public byte Unknown1E
-        {
-            get { return m_u1E; }
-            set { m_u1E = value; }
-        }
-
         public Stage Stage
         {
             get { return (Stage)m_stage_id; }
-            set { m_stage_id = (byte)value; }
+            set { m_stage_id = (ushort)value; }
         }
 
         [TypeConverter(typeof(Types.UInt32HexTypeConverter))]
@@ -234,12 +236,14 @@ namespace BrawlEventEditor.Brawl
             set { m_assist_switch = value; }
         }
 
+        [TypeConverter(typeof(Types.FloatTypeConverter))]
         public float GameSpeed
         {
             get { return m_game_speed; }
             set { m_game_speed = value; }
         }
 
+        [TypeConverter(typeof(Types.FloatTypeConverter))]
         public float CameraShake
         {
             get { return m_camera_shake; }
@@ -253,13 +257,7 @@ namespace BrawlEventEditor.Brawl
             set { m_u40 = value; }
         }
 
-        public ushort Unknown44
-        {
-            get { return m_u44; }
-            set { m_u44 = value; }
-        }
-
-        public ushort Music
+        public uint Music
         {
             get { return m_music_id; }
             set { m_music_id = value; }
@@ -288,35 +286,34 @@ namespace BrawlEventEditor.Brawl
             get { return m_characters; }
         }
 
-	    private uint   m_event_ext;
-	    private uint   m_u04;
-	    private byte   m_match_type;
-	    private byte   m_padding09;
-	    private byte   m_padding0A;
-	    private byte   m_padding0B;
-	    private uint   m_countdown;
-	    private uint   m_flags_10;
-	    private float  m_u14;
-	    private ushort m_u18;
-	    private ushort m_item_level;
-	    private byte   m_u1C;
-	    private byte   m_u1D;
-	    private byte   m_u1E;
-	    private byte   m_stage_id;
-	    private uint   m_flags_20;
-	    private uint   m_u24;
-        private uint   m_item_switch1;
-        private uint   m_item_switch2;
-	    private uint   m_poke_switch;
-	    private uint   m_assist_switch;
-	    private float  m_game_speed;
-	    private float  m_camera_shake;
-	    private uint   m_u40;
-	    private ushort m_u44;
-	    private ushort m_music_id;
-	    private ushort m_u48;
-	    private ushort m_u4A;
-	    private uint   m_u4C;
+	    private uint    m_event_ext;
+	    private uint    m_u04;
+	    private byte    m_match_type;
+	    private byte    m_padding09;
+	    private byte    m_padding0A;
+	    private byte    m_padding0B;
+	    private uint    m_countdown;
+	    private uint    m_flags_10;
+	    private float   m_u14;
+        private byte    m_u18;
+        private byte    m_is_team_game;
+	    private ushort  m_item_level;
+	    private byte    m_u1C;
+	    private byte    m_u1D;
+	    private ushort  m_stage_id;
+	    private uint    m_flags_20;
+	    private uint    m_u24;
+        private uint    m_item_switch1;
+        private uint    m_item_switch2;
+	    private uint    m_poke_switch;
+	    private uint    m_assist_switch;
+	    private float   m_game_speed;
+	    private float   m_camera_shake;
+	    private uint    m_u40;
+	    private uint    m_music_id;
+	    private ushort  m_u48;
+	    private ushort  m_u4A;
+	    private uint    m_u4C;
 
         private List<Character> m_characters = new List<Character>();
 
@@ -346,18 +343,18 @@ namespace BrawlEventEditor.Brawl
             m_event_ext         = reader.ReadUInt32();
             m_u04               = reader.ReadUInt32();
             m_match_type        = reader.ReadByte();
-            m_padding09               = reader.ReadByte();
-            m_padding0A               = reader.ReadByte();
-            m_padding0B               = reader.ReadByte();
-            m_countdown               = reader.ReadUInt32();
+            m_padding09         = reader.ReadByte();
+            m_padding0A         = reader.ReadByte();
+            m_padding0B         = reader.ReadByte();
+            m_countdown         = reader.ReadUInt32();
             m_flags_10          = reader.ReadUInt32();
             m_u14               = reader.ReadSingle();
-            m_u18               = reader.ReadUInt16();
-            m_item_level               = reader.ReadUInt16();
+            m_u18               = reader.ReadByte();
+            m_is_team_game      = reader.ReadByte();
+            m_item_level        = reader.ReadUInt16();
             m_u1C               = reader.ReadByte();
             m_u1D               = reader.ReadByte();
-            m_u1E               = reader.ReadByte();
-            m_stage_id          = reader.ReadByte();
+            m_stage_id          = reader.ReadUInt16();
             m_flags_20          = reader.ReadUInt32();
             m_u24               = reader.ReadUInt32();
             m_item_switch1      = reader.ReadUInt32();
@@ -367,8 +364,7 @@ namespace BrawlEventEditor.Brawl
             m_game_speed        = reader.ReadSingle();
             m_camera_shake      = reader.ReadSingle();
             m_u40               = reader.ReadUInt32();
-            m_u44    = reader.ReadUInt16();
-            m_music_id          = reader.ReadUInt16();
+            m_music_id          = reader.ReadUInt32();
             m_u48               = reader.ReadUInt16();
             m_u4A               = reader.ReadUInt16();
             m_u4C               = reader.ReadUInt32();
@@ -394,10 +390,10 @@ namespace BrawlEventEditor.Brawl
             writer.Write(m_flags_10);
             writer.Write(m_u14);
             writer.Write(m_u18);
+            writer.Write(m_is_team_game);
             writer.Write(m_item_level);
             writer.Write(m_u1C);
             writer.Write(m_u1D);
-            writer.Write(m_u1E);
             writer.Write(m_stage_id);
             writer.Write(m_flags_20);
             writer.Write(m_u24);
@@ -408,7 +404,6 @@ namespace BrawlEventEditor.Brawl
             writer.Write(m_game_speed);
             writer.Write(m_camera_shake);
             writer.Write(m_u40);
-            writer.Write(m_u44);
             writer.Write(m_music_id);
             writer.Write(m_u48);
             writer.Write(m_u4A);
