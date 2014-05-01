@@ -11,6 +11,6 @@ namespace BrawlEventEditor.Brawl
         void load(BEBinaryReader reader);
         void save(BEBinaryWriter writer);
 
-        long get_size();
+        uint get_size();
     }
 }

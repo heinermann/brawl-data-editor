@@ -17,7 +17,7 @@ namespace BrawlEventEditor.Brawl
         ushort  m_start_damage;
         ushort  m_unk5;
 
-        public const long SIZE = 14;
+        public const uint SIZE = 14;
 
         public void load(GisSharpBlog.NetTopologySuite.IO.BEBinaryReader reader)
         {
@@ -45,7 +45,7 @@ namespace BrawlEventEditor.Brawl
             writer.Write(m_unk5);
         }
 
-        public long get_size()
+        public uint get_size()
         {
             return SIZE;
         }

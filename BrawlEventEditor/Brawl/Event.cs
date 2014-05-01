@@ -53,16 +53,16 @@ namespace BrawlEventEditor.Brawl
 
         List<Character> m_characters = new List<Character>();
 
-        public const long HEAD_SIZE = 70;
+        public const uint HEAD_SIZE = 70;
 
-        long num_players(EventExtension ext)
+        uint num_players(EventExtension ext)
         {
             switch (ext)
             {
                 case EventExtension.Standard4: return 4;
                 case EventExtension.Roster9: return 9;
                 case EventExtension.Everyone38: return 38;
-                default: return -1;
+                default: return 0;
             }
         }
 
@@ -151,7 +151,7 @@ namespace BrawlEventEditor.Brawl
                 chara.save(writer);
         }
 
-        public long get_size()
+        public uint get_size()
         {
             return HEAD_SIZE + num_players(get_event_ext(m_characters.Count))*Character.SIZE;
         }

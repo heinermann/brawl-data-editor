@@ -23,7 +23,7 @@ namespace BrawlEventEditor.Brawl
         CharacterStats Medium = new CharacterStats();
         CharacterStats Hard = new CharacterStats();
 
-        public const long SIZE = 14 + 3 * CharacterStats.SIZE;
+        public const uint SIZE = 14 + 3 * CharacterStats.SIZE;
 
         public void load(GisSharpBlog.NetTopologySuite.IO.BEBinaryReader reader)
         {
@@ -59,7 +59,7 @@ namespace BrawlEventEditor.Brawl
             writer.Write(m_unk_0D);
         }
 
-        public long get_size()
+        public uint get_size()
         {
             return SIZE;
         }
