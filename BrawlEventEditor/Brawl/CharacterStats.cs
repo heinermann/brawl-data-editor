@@ -7,15 +7,15 @@ namespace BrawlEventEditor.Brawl
 {
     class CharacterStats : IData
     {
-        ushort  m_offense_ratio;
-        ushort  m_defense_ratio;
-        ushort  m_unknown;
-        byte    m_stock;
-        byte    m_unk2;
-        byte    m_unk3;
-        byte    m_unk4;
-        ushort  m_start_damage;
-        ushort  m_unk5;
+        public ushort  m_offense_ratio;
+        public ushort  m_defense_ratio;
+        public ushort  m_unknown;
+        public byte    m_stock;
+        public byte    m_unk2;
+        public byte    m_unk3;
+        public byte    m_unk4;
+        public ushort  m_start_damage;
+        public ushort  m_unk5;
 
         public const uint SIZE = 14;
 

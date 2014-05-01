@@ -23,7 +23,12 @@ namespace BrawlEventEditor
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Unimplemented");
+            if ( openFileDialog.ShowDialog() == DialogResult.OK )
+            {
+                Program.event_file.load(openFileDialog.FileName);
+                entry_list.Items.Clear();
+                entry_list.Items.AddRange( Program.event_file.m_entries.Keys.ToArray() );
+            }
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -33,12 +38,30 @@ namespace BrawlEventEditor
 
         private void saveasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Unimplemented");
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                Program.event_file.save(saveFileDialog.FileName);
+            }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void entry_list_SelectedValueChanged(object sender, EventArgs e)
+        {
+            string key = entry_list.SelectedItem.ToString();
+            if (Program.event_file.m_entries.ContainsKey(key) )
+            {
+                MessageBox.Show(key + " FOUND");
+                entry_props.SelectedObject = Program.event_file.m_entries[key];
+            }
+            else
+            {
+                MessageBox.Show(key + " NOT FOUND");
+                entry_props.SelectedObject = null;
+            }
         }
     }
 }

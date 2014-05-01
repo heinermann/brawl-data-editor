@@ -7,21 +7,21 @@ namespace BrawlEventEditor.Brawl
 {
     class Character : IData
     {
-        byte  m_character_id;
-        byte  m_status;
-        byte  m_unk_02;
-        byte  m_unk_03;
-        float m_chara_size;
-        byte  m_team;
-        byte  m_unk_09;
-        byte  m_unk_0A;
-        byte  m_unk_0B;
-        byte  m_unk_0C;
-        byte  m_unk_0D;
+        public byte  m_character_id;
+        public byte  m_status;
+        public byte  m_unk_02;
+        public byte  m_unk_03;
+        public float m_chara_size;
+        public byte  m_team;
+        public byte  m_unk_09;
+        public byte  m_unk_0A;
+        public byte  m_unk_0B;
+        public byte  m_unk_0C;
+        public byte  m_unk_0D;
 
-        CharacterStats Easy = new CharacterStats();
-        CharacterStats Medium = new CharacterStats();
-        CharacterStats Hard = new CharacterStats();
+        public CharacterStats Easy = new CharacterStats();
+        public CharacterStats Medium = new CharacterStats();
+        public CharacterStats Hard = new CharacterStats();
 
         public const uint SIZE = 14 + 3 * CharacterStats.SIZE;
 
@@ -57,6 +57,10 @@ namespace BrawlEventEditor.Brawl
             writer.Write(m_unk_0B);
             writer.Write(m_unk_0C);
             writer.Write(m_unk_0D);
+
+            Easy.save(writer);
+            Medium.save(writer);
+            Hard.save(writer);
         }
 
         public uint get_size()

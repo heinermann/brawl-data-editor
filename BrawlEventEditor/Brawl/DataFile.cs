@@ -7,14 +7,14 @@ using GisSharpBlog.NetTopologySuite.IO;
 
 namespace BrawlEventEditor.Brawl
 {
-    class DataFile<T> where T: IData
+    class DataFile<T> where T: IData, new()
     {
-        SortedDictionary<string, T> m_entries = new SortedDictionary<string, T>();
+        public SortedDictionary<string, T> m_entries = new SortedDictionary<string, T>();
 
         const uint HEADER_SIZE = 32;
         const uint ENTRY_SIZE = 8;
 
-        void load(string filename)
+        public void load(string filename)
         {
             m_entries.Clear();
             FileStream stream = new FileStream(filename, FileMode.Open);
@@ -47,14 +47,14 @@ namespace BrawlEventEditor.Brawl
                 
                 // Read data entry
                 stream.Position = data_offset;
-                T data = default(T);
+                T data = new T();
                 data.load(reader);
 
                 m_entries.Add(builder.ToString(), data);
             }
         }
 
-        void save(string filename)
+        public void save(string filename)
         {
             FileStream stream = new FileStream(filename, FileMode.CreateNew);
             BEBinaryWriter writer = new BEBinaryWriter(stream, Encoding.UTF8);
@@ -105,5 +105,7 @@ namespace BrawlEventEditor.Brawl
                 writer.Write('\0');
             }
         }
+
+
     }
 }

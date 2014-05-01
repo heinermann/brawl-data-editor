@@ -30,8 +30,8 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.entry_list = new System.Windows.Forms.ListBox();
-            this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.entry_props = new System.Windows.Forms.PropertyGrid();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,11 +40,13 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
+            this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -59,7 +61,7 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.propertyGrid1);
+            this.splitContainer1.Panel2.Controls.Add(this.entry_props);
             this.splitContainer1.Size = new System.Drawing.Size(710, 499);
             this.splitContainer1.SplitterDistance = 236;
             this.splitContainer1.TabIndex = 0;
@@ -72,25 +74,26 @@
             this.entry_list.Name = "entry_list";
             this.entry_list.Size = new System.Drawing.Size(236, 499);
             this.entry_list.TabIndex = 0;
+            this.entry_list.SelectedValueChanged += new System.EventHandler(this.entry_list_SelectedValueChanged);
             // 
-            // propertyGrid1
+            // entry_props
             // 
-            this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.propertyGrid1.Location = new System.Drawing.Point(0, 0);
-            this.propertyGrid1.Name = "propertyGrid1";
-            this.propertyGrid1.Size = new System.Drawing.Size(470, 499);
-            this.propertyGrid1.TabIndex = 0;
+            this.entry_props.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.entry_props.Location = new System.Drawing.Point(0, 0);
+            this.entry_props.Name = "entry_props";
+            this.entry_props.Size = new System.Drawing.Size(470, 499);
+            this.entry_props.TabIndex = 0;
             // 
-            // menuStrip1
+            // menuStrip
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.helpToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(710, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(710, 24);
+            this.menuStrip.TabIndex = 1;
+            this.menuStrip.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
@@ -108,7 +111,7 @@
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.openToolStripMenuItem.Text = "&Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -116,27 +119,27 @@
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveasToolStripMenuItem
             // 
             this.saveasToolStripMenuItem.Name = "saveasToolStripMenuItem";
-            this.saveasToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveasToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.saveasToolStripMenuItem.Text = "Save &as...";
             this.saveasToolStripMenuItem.Click += new System.EventHandler(this.saveasToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -152,9 +155,21 @@
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.DefaultExt = "dat";
+            this.openFileDialog.FileName = "sq_event_data.dat";
+            this.openFileDialog.Filter = "Brawl events data|sq_event_data.dat";
+            // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.DefaultExt = "dat";
+            this.saveFileDialog.FileName = "sq_event_data.dat";
+            this.saveFileDialog.Filter = "Brawl events data|sq_event_data.dat";
             // 
             // MainWindow
             // 
@@ -162,16 +177,16 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(710, 523);
             this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.menuStrip);
+            this.MainMenuStrip = this.menuStrip;
             this.Name = "MainWindow";
             this.Text = "Brawl Data Editor";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -181,8 +196,8 @@
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ListBox entry_list;
-        private System.Windows.Forms.PropertyGrid propertyGrid1;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.PropertyGrid entry_props;
+        private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
@@ -191,6 +206,8 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }
 

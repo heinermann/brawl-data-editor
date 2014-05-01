@@ -5,14 +5,14 @@ using System.Text;
 
 namespace BrawlEventEditor.Brawl
 {
-    enum MatchType
+    enum MatchType : byte
     {
         Time,
         Stock,
         Coin
     };
 
-    enum EventExtension
+    enum EventExtension : uint
     {
         Standard4,
         Roster9,
@@ -21,37 +21,103 @@ namespace BrawlEventEditor.Brawl
 
     class Event : IData
     {
-	    uint   m_event_ext;
-	    uint   m_u04;
-	    byte   m_match_type;
-	    byte   m_u09;
-	    byte   m_u0A;
-	    byte   m_u0B;
-	    uint   m_u0C;
-	    uint   m_flags_10;
-	    uint   m_u14;
-	    ushort m_u18;
-	    ushort m_u1A;
-	    byte   m_u1C;
-	    byte   m_u1D;
-	    byte   m_u1E;
-	    byte   m_stage_id;
-	    uint   m_flags_20;
-	    uint   m_u24;
-        uint   m_item_switch1;
-        uint   m_item_switch2;
-	    uint   m_poke_switch;
-	    uint   m_assist_switch;
-	    float  m_game_speed;
-	    float  m_camera_shake;
-	    uint   m_u40;
-	    ushort m_music_catagory;
-	    ushort m_music_id;
-	    ushort m_u48;
-	    ushort m_u4A;
-	    uint   m_u4C;
+        public EventExtension EventExtension
+        {
+            get { return (EventExtension)m_event_ext; }
+        }
 
-        List<Character> m_characters = new List<Character>();
+        public uint Unknown04
+        {
+            get { return m_u04; }
+            set { m_u04 = value; }
+        }
+
+        public MatchType MatchType
+        {
+            get { return (MatchType)m_match_type; }
+            set { m_u04 = (byte)value; }
+        }
+
+        public byte Unknown09
+        {
+            get { return m_u09; }
+            set { m_u09 = value; }
+        }
+
+        public byte Unknown0A
+        {
+            get { return m_u0A; }
+            set { m_u0A = value; }
+        }
+
+        public byte Unknown0B
+        {
+            get { return m_u0B; }
+            set { m_u0B = value; }
+        }
+
+        public uint Unknown0C
+        {
+            get { return m_u0C; }
+            set { m_u0C = value; }
+        }
+
+        public uint Flags10
+        {
+            get { return m_flags_10; }
+            set { m_flags_10 = value; }
+        }
+
+        public uint Unknown14
+        {
+            get { return m_u14; }
+            set { m_u14 = value; }
+        }
+
+        public uint Flags20
+        {
+            get { return m_flags_20; }
+            set { m_flags_20 = value; }
+        }
+
+
+
+        public List<Character> Characters
+        {
+            get { return m_characters; }
+        }
+
+	    private uint   m_event_ext;
+	    private uint   m_u04;
+	    private byte   m_match_type;
+	    private byte   m_u09;
+	    private byte   m_u0A;
+	    private byte   m_u0B;
+	    private uint   m_u0C;
+	    private uint   m_flags_10;
+	    private uint   m_u14;
+	    private ushort m_u18;
+	    private ushort m_u1A;
+	    private byte   m_u1C;
+	    private byte   m_u1D;
+	    private byte   m_u1E;
+	    private byte   m_stage_id;
+	    private uint   m_flags_20;
+	    private uint   m_u24;
+        private uint   m_item_switch1;
+        private uint   m_item_switch2;
+	    private uint   m_poke_switch;
+	    private uint   m_assist_switch;
+	    private float  m_game_speed;
+	    private float  m_camera_shake;
+	    private uint   m_u40;
+	    private ushort m_music_catagory;
+	    private ushort m_music_id;
+	    private ushort m_u48;
+	    private ushort m_u4A;
+	    private uint   m_u4C;
+
+        private List<Character> m_characters = new List<Character>();
 
         public const uint HEAD_SIZE = 70;
 
